@@ -1,0 +1,23 @@
+services:
+  mcp-server:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      - MCP_INTERNAL_API_URL=${MCP_INTERNAL_API_URL}
+      - MCP_INTERNAL_API_KEY=${MCP_INTERNAL_API_KEY}
+      - MCP_DATABASE_URL=${MCP_DATABASE_URL:-sqlite+aiosqlite:///./mcp_server.db}
+      - MCP_ANTHROPIC_API_KEY=${MCP_ANTHROPIC_API_KEY}
+      - MCP_MCP_API_KEY=${MCP_MCP_API_KEY:-mcp_secret_key_change_in_production}
+      - MCP_LOG_LEVEL=${MCP_LOG_LEVEL:-INFO}
+    volumes:
+      - .:/app
+    depends_on:
+      - sqlite-db
+
+  sqlite-db:
+    image: alpine:latest
+    volumes:
+      - dbdata:/data
+
+volumes:
+  dbdata:

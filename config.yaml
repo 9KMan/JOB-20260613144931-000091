@@ -1,0 +1,18 @@
+# MCP Server Configuration
+# All settings can be overridden via environment variables (prefix MCP_)
+
+# Internal API
+internal_api_url: "https://internal-api.example.com"
+internal_api_key: "your_api_key_here"
+
+# Database (SQLite for PoC)
+database_url: "sqlite+aiosqlite:///./mcp_server.db"
+
+# LLM (for production LLM-based agents)
+anthropic_api_key: ""
+
+# MCP Authentication
+mcp_api_key: "mcp_secret_key_change_in_production"
+
+# Observability
+log_level: "INFO"
