@@ -1,13 +1,21 @@
-# Phase 06: 6. Out of Scope
+# Phase 07: 7. Acceptance Criteria
 
-## Explicitly Out of Scope
-- Frontend (existing production dashboard)
-- Mobile applications
-- Marketing site
-- Rust engine modification (read-only exposure only)
-- Trading strategy development
+## Phase Goal
+Success criteria and verification steps
 
-## Instructions
-1. Read the plan above carefully
-2. Generate complete, production-ready code for each file
-3. Output ONLY file blocks in this format (triple-backtick with "file:" prefix):
+## Acceptance Criteria
+1. OAuth flow completes and tokens stored encrypted
+2. WebSocket connects and syncs data correctly
+3. Reconnection with exponential backoff works
+4. Rate limits handled gracefully
+5. Risk rules detect breaches and trigger liquidation
+6. Structured logging for all components
+7. Sentry alerting on critical events
+8. Health endpoint returns broker connection status
+9. All code in TypeScript strict mode
+10. Unit tests for core components
+
+## Verification
+- Unit tests pass
+- Integration tests with mock broker
+- Manual verification of OAuth flow
