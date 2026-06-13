@@ -1,16 +1,24 @@
-# Phase 04: 4. Data Model
+# Phase 04: Data Model
 
 ## Phase Goal
-Database schema, migrations, indexes
+Create the PostgreSQL schema (SQLite-compatible for PoC) for collections, embeddings, credentials, and query logs.
 
-## Database Schema
-- Main tables with proper indexes
-- TimescaleDB hypertable for time-series data
-- Migration files with rollback support
+## Preconditions
+- Phase 2 complete (database session ready)
 
-## Migrations
-```sql
--- Core tables with UUID primary keys
--- Indexes on account_id, time, symbol
--- TimescaleDB hypertable configuration
-```
+## Tasks
+- [ ] Create `alembic/versions/001_initial_schema.py` — collections, query_logs, embeddings, api_credentials tables
+- [ ] Add UUID primary keys and created_at timestamps to all tables
+- [ ] Create GIN indexes on text columns (query_logs.question, embeddings.content)
+- [ ] Seed `scripts/seed_collections.py` — populate collections table with placeholder entries
+- [ ] Create `src/mcp_server/models.py` — SQLAlchemy ORM models matching schema
+
+## Deliverables
+- `alembic/versions/001_initial_schema.py`
+- `scripts/seed_collections.py`
+- `src/mcp_server/models.py`
+
+## Verification
+- [ ] `alembic upgrade head` creates all tables without errors
+- [ ] ORM models import without errors
+- [ ] Seed script populates at least 2 collections

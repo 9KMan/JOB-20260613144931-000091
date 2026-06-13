@@ -1,18 +1,31 @@
-# Phase 03: 3. Architecture
+# Phase 03: Architecture
 
 ## Phase Goal
-Component design, API surface, data flow, error handling
+Implement the MCP protocol handler, agent pipeline, and data flow components.
 
-## Architecture Components
-1. **Connector** — OAuth flow, token management, REST + WebSocket client
-2. **RiskEngine** — breach detection, force-liquidation triggers
-3. **DataPipeline** — event processing, database writes
-4. **Observability** — structured logging, Sentry, health endpoints
+## Preconditions
+- Phase 2 complete (FastAPI, MCP SDK, config, DB session working)
 
-## API Design
-- REST endpoints: /api/{resource}/*
-- WebSocket: real-time event stream
-- Error handling: exponential backoff, idempotent processing
+## Tasks
+- [ ] Implement `src/mcp_server/protocol/handler.py` — JSON-RPC 2.0 request routing
+- [ ] Implement `src/mcp_server/protocol/errors.py` — MCPError classes with codes
+- [ ] Build `src/mcp_server/tools/registry.py` — dynamic tool registration and invocation
+- [ ] Create `src/mcp_server/agents/query_understanding.py` — intent classification, entity extraction
+- [ ] Create `src/mcp_server/agents/data_retrieval.py` — API client with retry logic, mock responses
+- [ ] Create `src/mcp_server/agents/response_synthesis.py` — NL generation from structured results
+- [ ] Create `src/mcp_server/middleware.py` — request logging middleware
+- [ ] Wire agents into tool handlers; verify end-to-end request flow
 
-## Data Flow
-Events → Connector → RiskEngine → DB write → Real-time push → UI
+## Deliverables
+- `src/mcp_server/protocol/handler.py`
+- `src/mcp_server/protocol/errors.py`
+- `src/mcp_server/tools/registry.py`
+- `src/mcp_server/agents/query_understanding.py`
+- `src/mcp_server/agents/data_retrieval.py`
+- `src/mcp_server/agents/response_synthesis.py`
+- `src/mcp_server/middleware.py`
+
+## Verification
+- [ ] MCP initialize request returns capabilities object
+- [ ] tools/list returns all 6 tool definitions
+- [ ] agents produce output from mock inputs without exceptions
